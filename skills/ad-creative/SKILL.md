@@ -55,7 +55,7 @@ Gather this context (ask if not provided):
 Before writing copy, define 3-5 distinct **angles** — different motivations for clicking:
 
 | Angle Type | Example |
-|-----------|--------|
+|-----------|---------|
 | Pain point | "Tired of [frustration]?" |
 | Outcome | "Get [desired result] in [timeframe]" |
 | Social proof | "Join [X] teams who..." |
