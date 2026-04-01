@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Content Creation Automation - Interest Form</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Google Sans', Roboto, Arial, sans-serif;
+      background-color: #f0ebf8;
+      color: #202124;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 24px 16px;
+    }
+
+    .form-container {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* Top color banner */
+    .form-header {
+      background: #673ab7;
+      border-radius: 8px 8px 0 0;
+      height: 10px;
+    }
+
+    .form-title-card {
+      background: #fff;
+      border-radius: 0 0 8px 8px;
+      padding: 32px 24px 20px;
+      margin-bottom: 12px;
+      border-top: none;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .form-title-card h1 {
+      font-size: 32px;
+      font-weight: 400;
+      color: #202124;
+      margin-bottom: 12px;
+    }
+
+    .form-title-card .description {
+      font-size: 14px;
+      color: #5f6368;
+      line-height: 1.7;
+    }
+
+    .form-title-card .description p {
+      margin-bottom: 10px;
+    }
+
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    .pricing-table th {
+      background: #673ab7;
+      color: #fff;
+      padding: 10px 16px;
+      text-align: left;
+      font-weight: 500;
+    }
+
+    .pricing-table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .pricing-table tr:nth-child(even) td {
+      background: #f8f5fd;
+    }
+
+    .required-note {
+      font-size: 13px;
+      color: #d93025;
+      margin-top: 12px;
+    }
+
+    /* Form cards */
+    .form-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      border-left: 4px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .form-card:focus-within {
+      border-left-color: #673ab7;
+    }
+
+    .form-card label {
+      display: block;
+      font-size: 16px;
+      font-weight: 400;
+      color: #202124;
+      margin-bottom: 16px;
+    }
+
+    .form-card label .required {
+      color: #d93025;
+      margin-left: 2px;
+    }
+
+    .form-card input[type="text"],
+    .form-card input[type="email"],
+    .form-card input[type="number"],
+    .form-card textarea,
+    .form-card select {
+      width: 100%;
+      padding: 8px 0;
+      border: none;
+      border-bottom: 1px solid #dadce0;
+      font-size: 14px;
+      font-family: inherit;
+      color: #202124;
+      outline: none;
+      background: transparent;
+      transition: border-color 0.2s;
+    }
+
+    .form-card input:focus,
+    .form-card textarea:focus,
+    .form-card select:focus {
+      border-bottom: 2px solid #673ab7;
+      padding-bottom: 7px;
+    }
+
+    .form-card input::placeholder,
+    .form-card textarea::placeholder {
+      color: #80868b;
+    }
+
+    .form-card textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .form-card select {
+      cursor: pointer;
+      appearance: auto;
+    }
+
+    /* Radio / Checkbox groups */
+    .option-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-group label {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 400;
+      margin-bottom: 0;
+      cursor: pointer;
+    }
+
+    .option-group input[type="radio"],
+    .option-group input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-right: 12px;
+      accent-color: #673ab7;
+      cursor: pointer;
+    }
+
+    /* Pricing calculator */
+    .calculator {
+      background: #f8f5fd;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 12px;
+    }
+
+    .calculator h3 {
+      font-size: 14px;
+      font-weight: 500;
+      color: #673ab7;
+      margin-bottom: 12px;
+    }
+
+    .calc-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      padding: 6px 0;
+    }
+
+    .calc-row.total {
+      border-top: 2px solid #673ab7;
+      margin-top: 8px;
+      padding-top: 10px;
+      font-weight: 500;
+      font-size: 16px;
+      color: #673ab7;
+    }
+
+    /* Slider */
+    .slider-container {
+      margin-top: 8px;
+    }
+
+    .slider-container input[type="range"] {
+      width: 100%;
+      accent-color: #673ab7;
+      border: none;
+      padding: 0;
+    }
+
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #5f6368;
+      margin-top: 4px;
+    }
+
+    .slider-value {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 500;
+      color: #673ab7;
+      margin: 8px 0;
+    }
+
+    /* Submit */
+    .form-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .submit-btn {
+      background: #673ab7;
+      color: #fff;
+      border: none;
+      padding: 10px 32px;
+      font-size: 14px;
+      font-family: inherit;
+      font-weight: 500;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .submit-btn:hover {
+      background: #5e2ca5;
+      box-shadow: 0 2px 6px rgba(103,58,183,0.3);
+    }
+
+    .clear-link {
+      color: #673ab7;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: inherit;
+    }
+
+    .clear-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Success state */
+    .success-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 48px 24px;
+      text-align: center;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      display: none;
+    }
+
+    .success-card .checkmark {
+      width: 64px;
+      height: 64px;
+      background: #673ab7;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 32px;
+      color: #fff;
+    }
+
+    .success-card h2 {
+      font-size: 24px;
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    .success-card p {
+      color: #5f6368;
+      font-size: 14px;
+    }
+
+    /* Validation */
+    .error-msg {
+      color: #d93025;
+      font-size: 12px;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .form-card.invalid {
+      border-left-color: #d93025;
+    }
+
+    .form-card.invalid .error-msg {
+      display: block;
+    }
+
+    .form-card.invalid input,
+    .form-card.invalid select {
+      border-bottom-color: #d93025;
+    }
+
+    /* Footer */
+    .form-footer {
+      text-align: center;
+      font-size: 12px;
+      color: #5f6368;
+      margin-top: 24px;
+      padding-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <!-- Header -->
+  <div class="form-header"></div>
+  <div class="form-title-card">
+    <h1>AI Content Creation Automation</h1>
+    <div class="description">
+      <p>Thank you for your interest in setting up an AI-powered content creation automation! Please fill out this form so we can better understand your needs and get you started.</p>
+
+      <table class="pricing-table">
+        <tr>
+          <th>Item</th>
+          <th>Cost</th>
+        </tr>
+        <tr>
+          <td>One-time setup fee</td>
+          <td><strong>$297</strong></td>
+        </tr>
+        <tr>
+          <td>Monthly maintenance (base)</td>
+          <td><strong>$20/month</strong></td>
+        </tr>
+        <tr>
+          <td>Image generation overage</td>
+          <td><strong>$50 per 10,000 images</strong></td>
+        </tr>
+      </table>
+
+      <p class="required-note">* Indicates required question</p>
+    </div>
+  </div>
+
+  <!-- Form — Uses FormSubmit.co to email submissions (free, no backend needed).
+       IMPORTANT: Replace truelifeconsultinginc@gmail.com below with your real email address.
+       The first submission will trigger a confirmation email from FormSubmit. -->
+  <form id="interestForm" action="https://formsubmit.co/truelifeconsultinginc@gmail.com" method="POST" novalidate>
+    <!-- FormSubmit config -->
+    <input type="hidden" name="_subject" value="New AI Automation Interest Form Submission">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="text" name="_honey" style="display:none">
+    <input type="hidden" name="_next" id="successRedirect">
+
+    <!-- Full Name -->
+    <div class="form-card" id="card-name">
+      <label for="fullName">Full Name <span class="required">*</span></label>
+      <input type="text" id="fullName" name="fullName" placeholder="Your answer" required>
+      <div class="error-msg">This is a required question</div>
+    </div>
+
+    <!-- Email -->
+    <div class="form-card" id="card-email">
+      <label for="email">Email Address <span class="required">*</span></label>
+      <input type="email" id="email" name="email" placeholder="Your email" required>
+      <div class="error-msg">Please enter a valid email address</div>
+    </div>
+
+    <!-- Business / Brand Name -->
+    <div class="form-card" id="card-business">
+      <label for="business">Business / Brand Name</label>
+      <input type="text" id="business" name="business" placeholder="Your answer">
+    </div>
+
+    <!-- Content Types -->
+    <div class="form-card" id="card-content">
+      <label>What types of content are you looking to automate? <span class="required">*</span></label>
+      <div class="option-group">
+        <label><input type="checkbox" name="contentType" value="social-media"> Social media posts</label>
+        <label><input type="checkbox" name="contentType" value="blog"> Blog articles</label>
+        <label><input type="checkbox" name="contentType" value="images"> AI-generated images</label>
+        <label><input type="checkbox" name="contentType" value="email"> Email newsletters</label>
+        <label><input type="checkbox" name="contentType" value="video-scripts"> Video scripts</label>
+        <label><input type="checkbox" name="contentType" value="ads"> Ad copy</label>
+        <label><input type="checkbox" name="contentType" value="other"> Other</label>
+      </div>
+      <div class="error-msg">Please select at least one option</div>
+    </div>
+
+    <!-- Estimated Monthly Images -->
+    <div class="form-card" id="card-images">
+      <label for="imageSlider">Estimated monthly image generation volume</label>
+      <div class="slider-container">
+        <div class="slider-value" id="imageCount">5,000 images</div>
+        <input type="range" id="imageSlider" name="imageVolume" min="0" max="100000" step="1000" value="5000">
+        <div class="slider-labels">
+          <span>0</span>
+          <span>25,000</span>
+          <span>50,000</span>
+          <span>75,000</span>
+          <span>100,000</span>
+        </div>
+      </div>
+
+      <!-- Cost calculator -->
+      <div class="calculator">
+        <h3>Estimated Cost Breakdown</h3>
+        <div class="calc-row">
+          <span>One-time setup fee</span>
+          <span>$297.00</span>
+        </div>
+        <div class="calc-row">
+          <span>Base monthly maintenance</span>
+          <span>$20.00</span>
+        </div>
+        <div class="calc-row" id="imageRow">
+          <span>Image generation (5,000 images)</span>
+          <span id="imageCost">$25.00</span>
+        </div>
+        <div class="calc-row total">
+          <span>Estimated monthly total</span>
+          <span id="monthlyTotal">$45.00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interest Level -->
+    <div class="form-card" id="card-interest">
+      <label>How would you describe your level of interest? <span class="required">*</span></label>
+      <div class="option-group">
+        <label><input type="radio" name="interest" value="ready" required> Ready to get started</label>
+        <label><input type="radio" name="interest" value="very-interested"> Very interested — just have a few questions</label>
+        <label><input type="radio" name="interest" value="exploring"> Exploring options, want to learn more</label>
+        <label><input type="radio" name="interest" value="curious"> Just curious for now</label>
+      </div>
+      <div class="error-msg">This is a required question</div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="form-card" id="card-timeline">
+      <label for="timeline">When are you looking to get started?</label>
+      <select id="timeline" name="timeline">
+        <option value="" disabled selected>Choose</option>
+        <option value="asap">As soon as possible</option>
+        <option value="1-2-weeks">Within 1–2 weeks</option>
+        <option value="1-month">Within a month</option>
+        <option value="unsure">Not sure yet</option>
+      </select>
+    </div>
+
+    <!-- Additional Info -->
+    <div class="form-card">
+      <label for="additional">Anything else you'd like us to know?</label>
+      <textarea id="additional" name="additional" placeholder="Your answer" rows="3"></textarea>
+    </div>
+
+    <!-- Actions -->
+    <div class="form-actions">
+      <button type="submit" class="submit-btn">Submit</button>
+      <button type="button" class="clear-link" onclick="clearForm()">Clear form</button>
+    </div>
+  </form>
+
+  <!-- Success -->
+  <div class="success-card" id="successCard">
+    <div class="checkmark">&#10003;</div>
+    <h2>Thank you!</h2>
+    <p>Your response has been recorded. We'll be in touch at the email you provided to discuss your AI content creation automation setup.</p>
+  </div>
+
+  <div class="form-footer">
+    AI Content Creation Automation Interest Form
+  </div>
+</div>
+
+<script>
+  // Set the success redirect to current page with ?submitted=true
+  document.getElementById('successRedirect').value = window.location.href.split('?')[0] + '?submitted=true';
+
+  // If redirected back after submission, show success
+  if (window.location.search.includes('submitted=true')) {
+    document.getElementById('interestForm').style.display = 'none';
+    document.getElementById('successCard').style.display = 'block';
+  }
+
+  const slider = document.getElementById('imageSlider');
+  const imageCount = document.getElementById('imageCount');
+  const imageCost = document.getElementById('imageCost');
+  const imageRow = document.getElementById('imageRow');
+  const monthlyTotal = document.getElementById('monthlyTotal');
+
+  function updateCalculator() {
+    const images = parseInt(slider.value);
+    const imgCost = (images / 10000) * 50;
+    const total = 20 + imgCost;
+
+    imageCount.textContent = images.toLocaleString() + ' images';
+    imageRow.querySelector('span').textContent = `Image generation (${images.toLocaleString()} images)`;
+    imageCost.textContent = '$' + imgCost.toFixed(2);
+    monthlyTotal.textContent = '$' + total.toFixed(2);
+  }
+
+  slider.addEventListener('input', updateCalculator);
+
+  function clearForm() {
+    if (confirm('This will remove your answers from all questions.')) {
+      document.getElementById('interestForm').reset();
+      slider.value = 5000;
+      updateCalculator();
+      document.querySelectorAll('.form-card').forEach(c => c.classList.remove('invalid'));
+    }
+  }
+
+  document.getElementById('interestForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    let valid = true;
+
+    // Name
+    const nameCard = document.getElementById('card-name');
+    if (!document.getElementById('fullName').value.trim()) {
+      nameCard.classList.add('invalid');
+      valid = false;
+    } else {
+      nameCard.classList.remove('invalid');
+    }
+
+    // Email
+    const emailCard = document.getElementById('card-email');
+    const emailVal = document.getElementById('email').value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailVal || !emailRegex.test(emailVal)) {
+      emailCard.classList.add('invalid');
+      valid = false;
+    } else {
+      emailCard.classList.remove('invalid');
+    }
+
+    // Content types
+    const contentCard = document.getElementById('card-content');
+    const checked = document.querySelectorAll('input[name="contentType"]:checked');
+    if (checked.length === 0) {
+      contentCard.classList.add('invalid');
+      valid = false;
+    } else {
+      contentCard.classList.remove('invalid');
+    }
+
+    // Interest level
+    const interestCard = document.getElementById('card-interest');
+    const interestSelected = document.querySelector('input[name="interest"]:checked');
+    if (!interestSelected) {
+      interestCard.classList.add('invalid');
+      valid = false;
+    } else {
+      interestCard.classList.remove('invalid');
+    }
+
+    if (!valid) {
+      const firstInvalid = document.querySelector('.form-card.invalid');
+      if (firstInvalid) firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // Inject computed fields as hidden inputs before submitting
+    let existing = document.getElementById('hiddenContentTypes');
+    if (existing) existing.remove();
+    let hiddenCT = document.createElement('input');
+    hiddenCT.type = 'hidden';
+    hiddenCT.name = 'Content Types';
+    hiddenCT.id = 'hiddenContentTypes';
+    hiddenCT.value = Array.from(checked).map(cb => cb.value).join(', ');
+    this.appendChild(hiddenCT);
+
+    let existingImg = document.getElementById('hiddenImageEst');
+    if (existingImg) existingImg.remove();
+    let hiddenImg = document.createElement('input');
+    hiddenImg.type = 'hidden';
+    hiddenImg.name = 'Estimated Monthly Images';
+    hiddenImg.id = 'hiddenImageEst';
+    hiddenImg.value = parseInt(slider.value).toLocaleString();
+    this.appendChild(hiddenImg);
+
+    let existingCost = document.getElementById('hiddenMonthlyCost');
+    if (existingCost) existingCost.remove();
+    let hiddenCost = document.createElement('input');
+    hiddenCost.type = 'hidden';
+    hiddenCost.name = 'Estimated Monthly Cost';
+    hiddenCost.id = 'hiddenMonthlyCost';
+    const images = parseInt(slider.value);
+    hiddenCost.value = '$' + (20 + (images / 10000) * 50).toFixed(2);
+    this.appendChild(hiddenCost);
+
+    // Submit the form to FormSubmit.co
+    this.submit();
+  });
+</script>
+
+</body>
+</html>
