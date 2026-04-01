@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "blotato": {
+      "type": "http",
+      "url": "https://mcp.blotato.com/mcp",
+      "headers": {
+        "blotato-api-key": "blt_c7wnhXv9ZqJ3rSEVPsfGNZ4EsvXUjNs782BemSTkJX0="
+      }
+    }
+  }
+}
